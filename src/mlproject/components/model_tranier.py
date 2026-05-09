@@ -124,13 +124,13 @@ class ModelTrainer:
             dagshub.init(repo_owner='rakeshcpr011', repo_name='E2EDSprojectKN', mlflow=True)
             mlflow.set_registry_uri("https://dagshub.com/rakeshcpr011/E2EDSprojectKN.mlflow")
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-    
+            mlflow.set_experiment("wine-quality-prediction")
             
 
 
             # mlflow
 
-            with mlflow.start_run():
+            with mlflow.start_run(run_name="ElasticNet_lr0.01_a0.5") as mlrun:
 
                 predicted_qualities = best_model.predict(X_test)
 
