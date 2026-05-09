@@ -1,8 +1,10 @@
 import os
+import dagshub
 import sys
 from dataclasses import dataclass
 from urllib.parse import urlparse
 import mlflow
+from dotenv import load_dotenv
 import mlflow.sklearn
 import numpy as np
 from sklearn.metrics import mean_squared_error,mean_absolute_error
@@ -116,9 +118,15 @@ class ModelTrainer:
                     actual_model = actual_model + model
 
             best_params = params[actual_model]
-
-            mlflow.set_registry_uri("https://dagshub.com/krishnaik06/mlprojecthindi.mlflow")
+            # 1. Sabse pehle env load karo
+            load_dotenv()
+            os.environ["E2EDSProjectwithDagsHub"] = os.getenv("E2EDSProjectwithDagsHub")
+            dagshub.init(repo_owner='rakeshcpr011', repo_name='E2EDSprojectKN', mlflow=True)
+            mlflow.set_registry_uri("https://dagshub.com/rakeshcpr011/E2EDSprojectKN.mlflow")
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+    
+            
+
 
             # mlflow
 

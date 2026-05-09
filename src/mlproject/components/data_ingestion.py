@@ -16,6 +16,7 @@ class DataIngestionConfig:
     test_data_path:str=os.path.join('artifacts','test.csv')
     raw_data_path:str=os.path.join('artifacts','raw.csv')
 
+
 class DataIngestion:
     def __init__(self):
         self.ingestion_config=DataIngestionConfig()
@@ -24,7 +25,7 @@ class DataIngestion:
         try:
             ##reading the data from mysql
             df=pd.read_csv(os.path.join('notebook/data','raw.csv'))
-            logging.info("Reading completed mysql database")
+            logging.info("Reading completed from raw data")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
@@ -38,10 +39,7 @@ class DataIngestion:
             return(
                 self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path
-
-
             )
-
 
         except Exception as e:
             raise CustomException(e,sys)
