@@ -120,17 +120,18 @@ class ModelTrainer:
             best_params = params[actual_model]
             # 1. Sabse pehle env load karo
             load_dotenv()
-            os.environ["E2EDSProjectwithDagsHub"] = os.getenv("E2EDSProjectwithDagsHub")
+            os.environ["DAGSHUB_USER_TOKEN"] = os.getenv("DAGSHUB_USER_TOKEN")
             dagshub.init(repo_owner='rakeshcpr011', repo_name='E2EDSprojectKN', mlflow=True)
+            mlflow.set_experiment("student-math-score-prediction")
             mlflow.set_registry_uri("https://dagshub.com/rakeshcpr011/E2EDSprojectKN.mlflow")
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-            mlflow.set_experiment("wine-quality-prediction")
+            
             
 
 
             # mlflow
 
-            with mlflow.start_run(run_name="ElasticNet_lr0.01_a0.5") as mlrun:
+            with mlflow.start_run(run_name=f"{best_model_name}_r2_{best_model_score:.2f}") as mlrun:
 
                 predicted_qualities = best_model.predict(X_test)
 
@@ -145,14 +146,17 @@ class ModelTrainer:
 
                 # Model registry does not work with file store
                 if tracking_url_type_store != "file":
-
-                    # Register the model
-                    # There are other ways to use the Model Registry, which depends on the use case,
-                    # please refer to the doc for more information:
-                    # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-                    mlflow.sklearn.log_model(best_model, "model", registered_model_name=actual_model)
+                     mlflow.sklearn.log_model(
+                      best_model, 
+                           "model", 
+            registered_model_name="StudentMathScorePredictor"
+                 )
                 else:
                     mlflow.sklearn.log_model(best_model, "model")
+
+                #     mlflow.sklearn.log_model(best_model, "model", registered_model_name=actual_model)
+                # else:
+                #     mlflow.sklearn.log_model(best_model, "model")
 
 
 
