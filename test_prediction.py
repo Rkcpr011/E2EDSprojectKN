@@ -1,4 +1,4 @@
-# test_prediction.py  ← project root mein banao
+# test_prediction.py  only for testing no use in project
 from src.mlproject.pipelines.prediction_pipeline import PredictPipeline, CustomData
 
 # Ek sample student ka data

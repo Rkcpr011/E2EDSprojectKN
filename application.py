@@ -4,6 +4,8 @@ import pandas as pd
 
 from src.mlproject.pipelines.prediction_pipeline import CustomData, PredictPipeline
 
+
+# ye flask app ke liye hai, jo khali prediction.py ko use krta hai , once after app.py is run and models are there.
 application = Flask(__name__)
 app = application
 

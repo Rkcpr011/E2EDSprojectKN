@@ -1,12 +1,10 @@
-numpy
-pandas
-python-dotenv
-mysql-connector-python
-pymysql
+flask
 scikit-learn
-seaborn
-catboost
+pandas
+numpy
 xgboost
+catboost
 mlflow
 dagshub
-#-e .
+python-dotenv
+gunicorn

@@ -29,6 +29,7 @@
 #         logging.info("Custom Exception")
 #         raise CustomException(e,sys)
 
+# ye pura training pipeline suru kr dega.
 import sys
 from src.mlproject.logger import logging
 from src.mlproject.exception import CustomException
